@@ -5,6 +5,6 @@ The goal is to build strong problem-solving skills in **Data Structures, Algorit
 
 ---
 It will contains solution of CSES sheet of the topics :
->> TREES
->> GRAPHS
->> DYNAMIC PROGRAMMING 
+>> **TREES**
+>> **GRAPHS**
+>> **DYNAMIC PROGRAMMING** 
