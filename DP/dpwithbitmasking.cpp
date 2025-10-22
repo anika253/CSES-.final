@@ -1,33 +1,30 @@
 #include <iostream>
-#include <vector>
+#include <vector>   
 using namespace std;
 
+int n = 5;
+
+int generate(int index, int mask, vector<int>& curr) {
+    if (index == n) {
+        for (int x : curr) cout << x << " ";
+        cout << "\n";
+        return 1;
+    }
+
+    int count = 0;
+    for (int i = 0; i < n; i++) {
+        if ((mask & (1 << i)) == 0) { // if i not used yet
+            curr.push_back(i);
+            count += generate(index + 1, mask | (1 << i), curr);
+            curr.pop_back(); // backtrack
+        }
+    }
+    return count;
+}
+
 int main() {
-    int n = 5;
-
-    auto f = [&](int index, int mask, vector<int> v, auto &&F) -> int {
-        if (index == n) {
-            for (auto &i : v) {
-                cout << i << " ";
-            }
-            cout << "\n";
-            return 1; // Count this permutation
-        }
-
-        int count = 0;
-        for (int i = 0; i < n; i++) {
-            if ((mask & (1 << i)) == 0) {
-                v.push_back(i);
-                count += F(index + 1, mask | (1 << i), v, F);
-                v.pop_back();
-            }
-        }
-
-        return count;
-    };
-
-    int total_permutations = f(0, 0, {}, f);
-    cout << "Total permutations: " << total_permutations << "\n";
-
+    vector<int> curr;
+    int total = generate(0, 0, curr);
+    cout << "Total permutations: " << total << "\n";
     return 0;
 }
